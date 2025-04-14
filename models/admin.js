@@ -7,6 +7,7 @@ export default (sequelize) => {
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
+   
     email: {
       type: DataTypes.STRING,
       allowNull: false,

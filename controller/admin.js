@@ -9,9 +9,9 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 export const createOrLoginAdmin = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { email, password } = req.body;
 
-    if (!email || !password || !name) {
+    if (!email || !password) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
@@ -36,7 +36,6 @@ export const createOrLoginAdmin = async (req, res) => {
         token,
         admin: {
           id: existingAdmin.id,
-          name: existingAdmin.name,
           email: existingAdmin.email,
         },
       });
@@ -51,7 +50,6 @@ export const createOrLoginAdmin = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const newAdmin = await Admin.create({
-      name,
       email,
       password: hashedPassword,
     });
@@ -67,19 +65,17 @@ export const createOrLoginAdmin = async (req, res) => {
     return res.status(201).json({
       message: "Admin created and logged in successfully",
       token,
-      admin: { id: newAdmin.id, name: newAdmin.name, email: newAdmin.email },
+      admin: { id: newAdmin.id, email: newAdmin.email },
     });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
 };
 
-
-// PUT /admin/update - Update admin email and/or password
 export const updateAdmin = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const adminId = req.user.id; // from verifyToken
+    const adminId = req.admin.id; 
 
     const admin = await Admin.findByPk(adminId);
     if (!admin) {
@@ -103,7 +99,6 @@ export const updateAdmin = async (req, res) => {
 
     return res.status(200).json({ message: "Admin updated successfully", admin: {
       id: admin.id,
-      name: admin.name,
       email: admin.email
     }});
   } catch (error) {
