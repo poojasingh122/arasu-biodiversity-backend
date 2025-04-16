@@ -11,10 +11,10 @@ import {
 import { upload } from "../helpers/uploads.js";
 import { verifyAdminToken } from "../helpers/token.js";
 
-router.post("/createPost", verifyAdminToken, upload, createGallery);
-router.get("/getAll-post", getAllGallery);
-router.get("/getById-post/:id", getGalleryById);
-router.put("/update-post/:id",upload, updateGallery);
-router.delete("/delete-post/:id", deleteGallery);
+router.post("/createGallery", verifyAdminToken, upload, createGallery);
+router.get("/getAll-gallery", getAllGallery);
+router.get("/getById-gallery/:id", getGalleryById);
+router.put("/update-gallery/:id",upload, updateGallery);
+router.delete("/delete-gallery/:id", deleteGallery);
 
 export default router;

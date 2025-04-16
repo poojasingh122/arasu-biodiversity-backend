@@ -11,7 +11,7 @@ import { upload } from "../helpers/uploads.js";
 
 const router = Router();
 
-router.post("/createTeam", verifyAdminToken,createTeam);
+router.post("/createTeam", verifyAdminToken,upload,createTeam);
 router.get("/getAllTeam", getAllTeams);
 router.get("/getById/:id", getTeamById);
 router.put("/updateTeam/:id",upload, updateTeam);
