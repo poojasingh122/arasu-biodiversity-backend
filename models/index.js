@@ -2,9 +2,10 @@ import { sequelize } from "../config/db.js";
 import AdminModel from "./admin.js";
 import PostAdModel from "./postAd.js";
 import EventModel from "./events.js";
-import BlogModel from './blog.js';
-import TeamModel from './team.js';
-import GalleryModel from './gallery.js';
+import BlogModel from "./blog.js";
+import TeamModel from "./team.js";
+import GalleryModel from "./gallery.js";
+import ContactUsModel from "./contactUs.js";
 
 const db = {};
 
@@ -15,6 +16,7 @@ db.Events = EventModel(sequelize);
 db.Blog = BlogModel(sequelize);
 db.Team = TeamModel(sequelize);
 db.Gallery = GalleryModel(sequelize);
+db.ContactUs = ContactUsModel(sequelize);
 
 // Object.keys(models).forEach((modelName) => {
 //     if (models[modelName].associate) {

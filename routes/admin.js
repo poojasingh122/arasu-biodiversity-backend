@@ -1,13 +1,17 @@
 import { Router } from "express";
 import {
-  createOrLoginAdmin,
+  createAdmin,
+ 
+  loginAdmin,
+ 
   updateAdmin,
   //  loginAdmin
 } from "../controller/admin.js";
 import { verifyAdminToken } from "../helpers/token.js";
 
 const router = Router();
-router.post("/create", createOrLoginAdmin);
+router.post("/create", createAdmin);
+router.post("/login",loginAdmin)
 
 router.put("/update", verifyAdminToken, updateAdmin);
 

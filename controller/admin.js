@@ -1,44 +1,17 @@
-/* eslint-disable no-undef */
-
 import { db } from "../models/index.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 const Admin = db.Admin;
+// eslint-disable-next-line no-undef
 const JWT_SECRET = process.env.JWT_SECRET;
 
-export const createOrLoginAdmin = async (req, res) => {
+export const createAdmin = async (req, res) => {
   try {
     const { email, password } = req.body;
 
     if (!email || !password) {
       return res.status(400).json({ message: "All fields are required" });
-    }
-
-    const existingAdmin = await Admin.findOne({ where: { email } });
-
-    if (existingAdmin) {
-      const isMatch = await bcrypt.compare(password, existingAdmin.password);
-      if (!isMatch) {
-        return res.status(401).json({ message: "Invalid password" });
-      }
-
-      const token = jwt.sign(
-        { id: existingAdmin.id, email: existingAdmin.email },
-        JWT_SECRET,
-        {
-          expiresIn: "1d",
-        }
-      );
-
-      return res.status(200).json({
-        message: "Login successful",
-        token,
-        admin: {
-          id: existingAdmin.id,
-          email: existingAdmin.email,
-        },
-      });
     }
 
     const adminCount = await Admin.count();
@@ -54,18 +27,47 @@ export const createOrLoginAdmin = async (req, res) => {
       password: hashedPassword,
     });
 
-    const token = jwt.sign(
-      { id: newAdmin.id, email: newAdmin.email },
-      JWT_SECRET,
-      {
-        expiresIn: "1d",
-      }
-    );
-
     return res.status(201).json({
       message: "Admin created and logged in successfully",
-      token,
       admin: { id: newAdmin.id, email: newAdmin.email },
+    });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+export const loginAdmin = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
+    const existingAdmin = await Admin.findOne({ where: { email } });
+
+    if (!existingAdmin) {
+      return res.status(404).json({ message: "Admin not found" });
+    }
+
+    const isMatch = await bcrypt.compare(password, existingAdmin.password);
+    if (!isMatch) {
+      return res.status(401).json({ message: "Invalid password" });
+    }
+
+    const token = jwt.sign(
+      { id: existingAdmin.id, email: existingAdmin.email },
+      JWT_SECRET,
+      { expiresIn: "1d" }
+    );
+
+    return res.status(200).json({
+      message: "Login successful",
+      token,
+      admin: {
+        id: existingAdmin.id,
+        email: existingAdmin.email,
+      },
     });
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -75,7 +77,7 @@ export const createOrLoginAdmin = async (req, res) => {
 export const updateAdmin = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const adminId = req.admin.id; 
+    const adminId = req.admin.id;
 
     const admin = await Admin.findByPk(adminId);
     if (!admin) {
@@ -97,10 +99,13 @@ export const updateAdmin = async (req, res) => {
 
     await admin.save();
 
-    return res.status(200).json({ message: "Admin updated successfully", admin: {
-      id: admin.id,
-      email: admin.email
-    }});
+    return res.status(200).json({
+      message: "Admin updated successfully",
+      admin: {
+        id: admin.id,
+        email: admin.email,
+      },
+    });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

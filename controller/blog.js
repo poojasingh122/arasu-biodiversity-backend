@@ -4,7 +4,7 @@ const Blog = db.Blog;
 
 export const createBlog = async (req, res) => {
   try {
-    const { title, content, date, readTime, author } = req.body;
+    const { title, content, date, readTime, author, blogCategory } = req.body;
     if (!title || !content || !author || !date || !readTime) {
       return res.status(400).json({
         message: "All fields are required",
@@ -22,6 +22,7 @@ export const createBlog = async (req, res) => {
       date,
       readTime,
       author,
+      blogCategory,
       images,
     });
     return res.status(201).json({
@@ -60,7 +61,7 @@ export const getBlogById = async (req, res) => {
 export const updateBlog = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, content, date, readTime, author } = req.body;
+    const { title, content, date, readTime, author, blogCategory } = req.body;
     const blog = await Blog.findByPk(id);
     if (!blog) {
       return res.status(404).json({ message: "Blog not found" });
@@ -79,6 +80,7 @@ export const updateBlog = async (req, res) => {
       readTime,
       author,
       images,
+      blogCategory,
     });
     res.status(201).json({ message: "Blog updated successfully", data: blog });
   } catch (error) {

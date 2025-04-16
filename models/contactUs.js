@@ -1,28 +1,32 @@
 import { DataTypes } from "sequelize";
 
 export default (sequelize) => {
-  const team = sequelize.define("Teams", {
+  const contact = sequelize.define("ContactUs", {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    name: {
+    firstName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    designation: {
+    lastName: {
       type: DataTypes.STRING,
-      allowNull: true,
-    },
-    role: {
-      type: DataTypes.ENUM("founder", "bao"),
       allowNull: false,
     },
-    images: {
-      type: DataTypes.JSON,
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    phoneNumber: {
+      type: DataTypes.STRING(12),
+      allowNull: false,
+    },
+    message: {
+      type: DataTypes.TEXT,
       allowNull: false,
     },
   });
-  return team;
+  return contact;
 };

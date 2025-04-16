@@ -7,9 +7,9 @@ export default (sequelize) => {
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    images:{
-        type:DataTypes.JSON,
-        allowNull:false,
+    images: {
+      type: DataTypes.JSON,
+      allowNull: false,
     },
     title: {
       type: DataTypes.STRING,
@@ -19,17 +19,21 @@ export default (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    date:{
-      type:DataTypes.DATEONLY,
-      allowNull:true,
+    date: {
+      type: DataTypes.DATEONLY,
+      allowNull: true,
     },
-    readTime:{
-      type:DataTypes.ENUM("5min","10min", "15min"),
-      allowNull:true
+    readTime: {
+      type: DataTypes.ENUM("5min", "10min", "15min"),
+      allowNull: true,
     },
     author: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    blogCategory: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
   });
   return blogs;
