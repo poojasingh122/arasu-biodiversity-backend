@@ -13,7 +13,7 @@ const router = Router();
 router.post("/createBlog",verifyAdminToken, upload, createBlog);
 router.get("/getAll-blog", getAllBlog);
 router.get("/getById-blog/:id", getBlogById);
-router.put("/updateBlog/:id", updateBlog);
+router.put("/updateBlog/:id",upload, updateBlog);
 router.delete("/deleteBlog/:id", deleteBlog);
 
 export default router;

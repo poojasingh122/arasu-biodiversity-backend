@@ -25,7 +25,7 @@ const upload = multer({
 
     cb(null, true);
   },
-}).fields([{ name: "images", maxCount: 50 }]);
+}).fields([{ name: "images", maxCount: 10 }]);
 
 // upload images to Cloudinary
 async function imageUploadUtil(buffer) {

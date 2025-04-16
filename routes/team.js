@@ -7,13 +7,14 @@ import {
   updateTeam,
 } from "../controller/team.js";
 import { verifyAdminToken } from "../helpers/token.js";
+import { upload } from "../helpers/uploads.js";
 
 const router = Router();
 
 router.post("/createTeam", verifyAdminToken,createTeam);
 router.get("/getAllTeam", getAllTeams);
 router.get("/getById/:id", getTeamById);
-router.put("/updateTeam/:id", updateTeam);
+router.put("/updateTeam/:id",upload, updateTeam);
 router.delete("/deleteTeam/:id", deleteTeam);
 
 export default router;

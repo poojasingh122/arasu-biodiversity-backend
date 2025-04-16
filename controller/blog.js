@@ -10,12 +10,15 @@ export const createBlog = async (req, res) => {
         message: "All fields are required",
       });
     }
-    const images =
-      req.files?.images && req.files.images.length
-        ? await Promise.all(
-            req.files.images.map((file) => imageUploadUtil(file.buffer))
-          )
-        : [];
+    let imageUrls = [];
+    const images = req.files?.images;
+
+    if (images && images.length > 0) {
+      imageUrls = await Promise.all(
+        images.map((image) => imageUploadUtil(image.buffer))
+      );
+    }
+   
     const newBlog = await Blog.create({
       title,
       content,
@@ -23,7 +26,7 @@ export const createBlog = async (req, res) => {
       readTime,
       author,
       blogCategory,
-      images,
+      images:imageUrls,
     });
     return res.status(201).json({
       message: "Blog Created Successfully",

@@ -25,7 +25,7 @@ export const createContact = async (req, res) => {
       subject: "Thank you for contacting us!",
       text: `
         Name: ${firstName} ${lastName}
-         Phone: ${phoneNumber}
+        Phone: ${phoneNumber}
         Message: ${message}
       `,
     });
