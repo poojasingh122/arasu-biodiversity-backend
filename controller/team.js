@@ -66,7 +66,7 @@ export const getTeamById = async (req, res) => {
 export const updateTeam = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, designation, role } = req.body;
+    const { name, designation, role,visibility } = req.body;
     const team = await Teams.findByPk(id);
     if (!team)
       return res.status(404).json({ message: "Team Member not found" });
@@ -93,6 +93,7 @@ export const updateTeam = async (req, res) => {
     team.name = name || team.name;
     team.designation = role === "boa" ? designation : null;
     team.role = role || team.role;
+    team.visibility = visibility || team.visibility;
     if (images) team.images = images;
     await team.save();
     res.status(201).json({

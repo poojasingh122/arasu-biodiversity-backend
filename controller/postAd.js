@@ -67,7 +67,7 @@ export const getPostAdById = async (req, res) => {
 export const updatePostAd = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description,date} = req.body;
+    const { title, description,date,visibility} = req.body;
     const post = await postAd.findByPk(id);
     if (!post) return res.status(404).json({ message: "PostAd not found" });
 
@@ -86,7 +86,8 @@ export const updatePostAd = async (req, res) => {
       description,
       images,
       video,
-      date
+      date,
+      visibility
     });
     return res.status(201).json({
       message: "PostAd updated successfully",

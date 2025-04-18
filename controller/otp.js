@@ -12,7 +12,7 @@ export const sendOtp = (req, res) => {
   const otp = generateOTP();
   otpStore.set(phoneNumber, otp);
 
-  console.log(`OTP for ${phoneNumber}: ${otp}`); // Replace with SMS integration
+  console.log(`OTP for ${phoneNumber}: ${otp}`); 
 
   res.json({ message: "OTP sent successfully" });
 };

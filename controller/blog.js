@@ -65,7 +65,7 @@ export const getBlogById = async (req, res) => {
 export const updateBlog = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, content, date, readTime, author, blogCategory } = req.body;
+    const { title, content, date, readTime, author, blogCategory,visibility } = req.body;
     const blog = await Blog.findByPk(id);
     if (!blog) {
       return res.status(404).json({ message: "Blog not found" });
@@ -85,6 +85,7 @@ export const updateBlog = async (req, res) => {
       author,
       images,
       blogCategory,
+      visibility
     });
     res.status(201).json({ message: "Blog updated successfully", data: blog });
   } catch (error) {
