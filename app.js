@@ -34,7 +34,7 @@ app.use(bodyParser.json());
 app.use("/api", router);
 
 db.sequelize
-  .sync({ force: false, alter: true })
+  .sync({ force: false })
   .then(async () => {
     console.log("Database Connected Successfully");
     // await createAdmin();

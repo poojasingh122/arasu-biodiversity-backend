@@ -18,6 +18,11 @@ export default (sequelize) => {
       type: DataTypes.JSON,
       allowNull: false,
     },
+    visibility:{
+      type:DataTypes.BOOLEAN,
+      allowNull:false,
+      defaultValue: true,
+    }
   });
   return gallery;
 };

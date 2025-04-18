@@ -35,6 +35,11 @@ export default (sequelize) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
+    visibility:{
+      type:DataTypes.BOOLEAN,
+      allowNull:false,
+      defaultValue: true,
+    }
   });
   return blogs;
 };

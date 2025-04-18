@@ -4,7 +4,7 @@ const Events = db.Events;
 
 export const createEvent = async (req, res) => {
   try {
-    const { title, description, location, eventDate, eventTime } = req.body;
+    const { title, description, location, eventDate, eventTime,visibility} = req.body;
 
     if (!title || !description || !location || !eventDate || !eventTime) {
       return res.status(400).json({
@@ -27,6 +27,7 @@ export const createEvent = async (req, res) => {
       eventDate,
       eventTime,
       images,
+      visibility
     });
     return res
       .status(201)

@@ -16,13 +16,18 @@ export default (sequelize) => {
       allowNull: true,
     },
     role: {
-      type: DataTypes.ENUM("founder", "bao"),
+      type: DataTypes.ENUM("founder","boa"),
       allowNull: false,
     },
     images: {
       type: DataTypes.JSON,
       allowNull: false,
     },
+    visibility:{
+      type:DataTypes.BOOLEAN,
+      allowNull:false,
+      defaultValue: true,
+    }
   });
   return team;
 };

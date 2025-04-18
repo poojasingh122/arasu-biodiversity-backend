@@ -110,3 +110,16 @@ export const updateAdmin = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
+
+export const getAdminById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const admin = await Admin.findByPk(id);
+    if (!admin) return res.status(400).json({ message: "Admin not found" });
+    res.status(200).json(admin);
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+};

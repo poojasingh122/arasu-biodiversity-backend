@@ -18,6 +18,19 @@ export default (sequelize) => {
       type: DataTypes.JSON,
       allowNull: false,
     },
+    video:{
+      type:DataTypes.JSON,
+      allowNull:true,
+    },
+    date:{
+      type:DataTypes.DATEONLY,
+      allowNull:true,
+    },
+    visibility:{
+      type:DataTypes.BOOLEAN,
+      allowNull:false,
+      defaultValue: true,
+    }
   });
   return postAd;
 };

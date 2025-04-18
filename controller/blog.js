@@ -4,7 +4,7 @@ const Blog = db.Blog;
 
 export const createBlog = async (req, res) => {
   try {
-    const { title, content, date, readTime, author, blogCategory } = req.body;
+    const { title, content, date, readTime, author, blogCategory,visibility } = req.body;
     if (!title || !content || !author || !date || !readTime) {
       return res.status(400).json({
         message: "All fields are required",
@@ -18,7 +18,7 @@ export const createBlog = async (req, res) => {
         images.map((image) => imageUploadUtil(image.buffer))
       );
     }
-   
+
     const newBlog = await Blog.create({
       title,
       content,
@@ -26,7 +26,8 @@ export const createBlog = async (req, res) => {
       readTime,
       author,
       blogCategory,
-      images:imageUrls,
+      images: imageUrls,
+      visibility,
     });
     return res.status(201).json({
       message: "Blog Created Successfully",

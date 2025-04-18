@@ -1,12 +1,12 @@
 import { sequelize } from "../config/db.js";
-import { imageUploadUtil } from "../helpers/uploads.js";
+import { imageUploadUtil, videoUploadUtil } from "../helpers/uploads.js";
 import { db } from "../models/index.js";
 const postAd = db.postAd;
 
 export const createPostAd = async (req, res) => {
   const transaction = await sequelize.transaction();
   try {
-    const { title, description } = req.body;
+    const { title, description,date,visibility } = req.body;
     if (!title || !description) {
       return res.status(400).json({ error: "All fields are required" });
     }
@@ -17,11 +17,16 @@ export const createPostAd = async (req, res) => {
             req.files.images.map((file) => imageUploadUtil(file.buffer))
           )
         : [];
+
+        const video = req.files?.video && req.files.video.length ? await Promise.all(req.files.video.map((file) => videoUploadUtil(file.buffer))) :[];
     const newPost = await postAd.create(
       {
         title,
         description,
         images,
+        video,
+        date,
+        visibility
       },
       { transaction }
     );
@@ -62,21 +67,26 @@ export const getPostAdById = async (req, res) => {
 export const updatePostAd = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description } = req.body;
-    const post = await db.postAd.findByPk(id);
+    const { title, description,date} = req.body;
+    const post = await postAd.findByPk(id);
     if (!post) return res.status(404).json({ message: "PostAd not found" });
 
-    let images = post.images;
+    let images = postAd.images;
     if (req.files?.length) {
       images = await Promise.all(
         req.files.map((file) => imageUploadUtil(file.buffer))
       );
     }
-
+    let video = postAd.video;
+    if(req.files?.length){
+      video = await Promise.all(req.files.map((file) => videoUploadUtil(file.buffer)))
+    }
     await post.update({
       title,
       description,
       images,
+      video,
+      date
     });
     return res.status(201).json({
       message: "PostAd updated successfully",

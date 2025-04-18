@@ -3,8 +3,8 @@ import { db } from "../models/index.js";
 const Gallery = db.Gallery;
 
 export const createGallery = async (req, res) => {
-  const { title, description } = req.body;
-  if (!title || !description) {
+  const { title } = req.body;
+  if (!title) {
     return res.status(400).json({
       message: "All fields are required",
     });
@@ -17,7 +17,6 @@ export const createGallery = async (req, res) => {
       : [];
   const gallery = await Gallery.create({
     title,
-    description,
     images,
   });
   return res.status(200).json({
@@ -51,7 +50,7 @@ export const getGalleryById = async (req, res) => {
 export const updateGallery = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description } = req.body;
+    const { title,visibility} = req.body;
     const gallery = await Gallery.findByPk(id);
     if (!gallery) return res.status(404).json({ message: "Gallery not found" });
 
@@ -64,7 +63,7 @@ export const updateGallery = async (req, res) => {
 
     await gallery.update({
       title,
-      description,
+      visibility,
       images,
     });
     return res.status(201).json({
