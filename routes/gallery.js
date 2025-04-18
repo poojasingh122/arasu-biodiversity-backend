@@ -17,6 +17,6 @@ router.get("/getAll-gallery", getAllGallery);
 router.get("/getById-gallery/:id", getGalleryById);
 router.put("/update-gallery/:id",upload, updateGallery);
 router.delete("/delete-gallery/:id", deleteGallery);
-router.delete("/deleteAll",deleteAll)
+router.post("/deleteAll",deleteAll)
 
 export default router;

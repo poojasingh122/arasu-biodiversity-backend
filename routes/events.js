@@ -17,6 +17,6 @@ router.get("/getAll-events", getAllEvents);
 router.get("/getById/:id", getEventsById);
 router.put("/updateEvent/:id",upload, updateEvnets);
 router.delete("/deleteEvent/:id", deleteEvent);
-router.delete("/deleteAll",deleteAll)
+router.post("/deleteAll",deleteAll)
 
 export default router;

@@ -17,6 +17,6 @@ router.get("/getAllTeam", getAllTeams);
 router.get("/getById/:id", getTeamById);
 router.put("/updateTeam/:id",upload, updateTeam);
 router.delete("/deleteTeam/:id", deleteTeam);
-router.delete("/deleteAll",deleteAll)
+router.post("/deleteAll",deleteAll)
 
 export default router;
