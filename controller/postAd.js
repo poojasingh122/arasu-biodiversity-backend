@@ -7,7 +7,7 @@ export const createPostAd = async (req, res) => {
   const transaction = await sequelize.transaction();
   try {
     const { title, description,date,visibility } = req.body;
-    if (!title || !description) {
+    if (!title || !description|| !visibility) {
       return res.status(400).json({ error: "All fields are required" });
     }
 

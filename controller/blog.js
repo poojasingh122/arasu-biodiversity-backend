@@ -5,7 +5,7 @@ const Blog = db.Blog;
 export const createBlog = async (req, res) => {
   try {
     const { title, content, date, readTime, author, blogCategory,visibility } = req.body;
-    if (!title || !content || !author || !date || !readTime) {
+    if (!title || !content || !author || !date || !readTime || !visibility) {
       return res.status(400).json({
         message: "All fields are required",
       });

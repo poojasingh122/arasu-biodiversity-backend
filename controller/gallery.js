@@ -3,8 +3,8 @@ import { db } from "../models/index.js";
 const Gallery = db.Gallery;
 
 export const createGallery = async (req, res) => {
-  const { title } = req.body;
-  if (!title) {
+  const { title,visibility } = req.body;
+  if (!title || !visibility) {
     return res.status(400).json({
       message: "All fields are required",
     });
@@ -17,6 +17,7 @@ export const createGallery = async (req, res) => {
       : [];
   const gallery = await Gallery.create({
     title,
+    visibility,
     images,
   });
   return res.status(200).json({

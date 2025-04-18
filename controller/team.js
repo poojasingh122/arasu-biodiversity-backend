@@ -5,7 +5,7 @@ const Teams = db.Team;
 export const createTeam = async (req, res) => {
   try {
     const { name, designation, role, visibility } = req.body;
-    if (!name || !designation || !role) {
+    if (!name || !designation || !role || !visibility) {
       return res.status(400).json({
         message: "All fields are required",
       });
