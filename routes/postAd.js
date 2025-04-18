@@ -17,6 +17,6 @@ router.get("/getAll-post", getAllPostAd);
 router.get("/getById-post/:id", getPostAdById);
 router.put("/update-post/:id",upload, updatePostAd);
 router.delete("/delete-post/:id", deletePostAd);
-router.delete("/deleteAll",deleteAll)
+router.post("/deleteAll",deleteAll)
 
 export default router;
