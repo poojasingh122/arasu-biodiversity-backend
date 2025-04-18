@@ -109,3 +109,20 @@ export const deleteEvent = async (req, res) => {
     return res.status(400).json({ message: error.message });
   }
 };
+
+export const deleteAll = async (req, res) => {
+  try {
+    const { ids } = req.body;
+
+    if (!Array.isArray(ids) || ids.length === 0) {
+      return res.status(400).json({ message: "No team IDs provided" });
+    }
+
+    await Events.destroy({ where: { id: ids } });
+
+    return res.status(200).json({ message: "Selected events deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting events:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};

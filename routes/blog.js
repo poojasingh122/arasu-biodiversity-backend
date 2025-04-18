@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   createBlog,
+  deleteAll,
   deleteBlog,
   getAllBlog,
   getBlogById,
@@ -15,5 +16,6 @@ router.get("/getAll-blog", getAllBlog);
 router.get("/getById-blog/:id", getBlogById);
 router.put("/updateBlog/:id",upload, updateBlog);
 router.delete("/deleteBlog/:id", deleteBlog);
+router.delete("/deleteAll",deleteAll)
 
 export default router;

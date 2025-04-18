@@ -5,7 +5,7 @@ const Teams = db.Team;
 export const createTeam = async (req, res) => {
   try {
     const { name, designation, role, visibility } = req.body;
-    if (!name || !designation || !role || !visibility) {
+    if (!name || !role || !visibility) {
       return res.status(400).json({
         message: "All fields are required",
       });
@@ -41,9 +41,9 @@ export const createTeam = async (req, res) => {
 
 export const getAllTeams = async (req, res) => {
   try {
-    const founder = await Teams.findAll({ where: { role: "founder" } });
-    const boas = await Teams.findAll({ where: { role: "boa" } });
-    return res.status(200).json({ data: founder, boas });
+    const  team = await Teams.findAll();
+
+    return res.status(200).json({ data:team  });
   } catch (error) {
     return res.status(400).json({ message: error.message });
   }
@@ -115,5 +115,22 @@ export const deleteTeam = async (req, res) => {
     return res.status(200).json({ message: "Team Member deleted sucessfully" });
   } catch (error) {
     return res.status(400).json({ message: error.message });
+  }
+};
+
+export const deleteAll = async (req, res) => {
+  try {
+    const { ids } = req.body;
+
+    if (!Array.isArray(ids) || ids.length === 0) {
+      return res.status(400).json({ message: "No team IDs provided" });
+    }
+
+    await Teams.destroy({ where: { id: ids } });
+
+    return res.status(200).json({ message: "Selected team deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting team:", error);
+    return res.status(500).json({ message: "Internal server error" });
   }
 };
