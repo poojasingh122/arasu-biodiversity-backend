@@ -1,14 +1,7 @@
 import { Router } from "express";
 
 const router = Router();
-import {
-  createGallery,
-  getAllGallery,
-  getGalleryById,
-  updateGallery,
-  deleteGallery,
-  deleteAll,
-} from "../controller/gallery.js";
+import {createGallery,getAllGallery,getGalleryById,updateGallery,deleteGallery,deleteAll,} from "../controller/gallery.js";
 import { upload } from "../helpers/uploads.js";
 import { verifyAdminToken } from "../helpers/token.js";
 

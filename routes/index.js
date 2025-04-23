@@ -9,6 +9,9 @@ import teamRoutes from "./team.js";
 import galleryRoutes from "./gallery.js";
 import otpRoutes from "./otp.js";
 import contactUsRoutes from "./contactUs.js";
+import paymentUserRoutes from "./paymentForm.js";
+import userTrackRoutes from './user.js'
+import paymentRoutes from './razorpay.js'
 
 router.use("/", adminRoutes);
 router.use("/post", postAdRoutes);
@@ -18,5 +21,8 @@ router.use("/team", teamRoutes);
 router.use("/gallery", galleryRoutes);
 router.use("/otp", otpRoutes);
 router.use("/contact", contactUsRoutes);
+router.use("/paymentUser", paymentUserRoutes);
+router.use("/userTrack",userTrackRoutes)
+router.use("/payment",paymentRoutes)
 
 export { router };

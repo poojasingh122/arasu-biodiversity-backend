@@ -1,49 +1,48 @@
 import { DataTypes } from "sequelize";
 
 export default (sequelize) => {
-  const events = sequelize.define("Events", {
+  const userTrack = sequelize.define("UserTrack", {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    occassion: {
+    ip: {
       type: DataTypes.STRING,
+      allowNull: false,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    city: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    region: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    country: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    postal: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    latitude: {
+      type: DataTypes.FLOAT,
       allowNull: true,
     },
-    title: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    location: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    googleMap: {
-      type: DataTypes.STRING,
+    longitude: {
+      type: DataTypes.FLOAT,
       allowNull: true,
     },
-    eventDate: {
-      type: DataTypes.DATE,
+    timeZone: {
+      type: DataTypes.STRING,
       allowNull: false,
-    },
-    eventTime: {
-      type: DataTypes.TIME,
-      allowNull: false,
-    },
-    images: {
-      type: DataTypes.JSON,
-      allowNull: false,
-    },
-    visibility: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: true,
     },
   });
-  return events;
+  return userTrack;
 };

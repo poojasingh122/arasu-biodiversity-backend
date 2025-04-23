@@ -6,8 +6,8 @@ const postAd = db.postAd;
 export const createPostAd = async (req, res) => {
   const transaction = await sequelize.transaction();
   try {
-    const { title, description,date,visibility } = req.body;
-    if (!title || !description|| !visibility) {
+    const { title, description,date,visibility,status } = req.body;
+    if (!title || !description|| !visibility ||!status) {
       return res.status(400).json({ error: "All fields are required" });
     }
 
@@ -26,7 +26,8 @@ export const createPostAd = async (req, res) => {
         images,
         video,
         date,
-        visibility
+        visibility,
+        status,
       },
       { transaction }
     );
@@ -67,7 +68,7 @@ export const getPostAdById = async (req, res) => {
 export const updatePostAd = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description,date,visibility} = req.body;
+    const { title, description,date,visibility,status} = req.body;
     const post = await postAd.findByPk(id);
     if (!post) return res.status(404).json({ message: "PostAd not found" });
 
@@ -87,7 +88,8 @@ export const updatePostAd = async (req, res) => {
       images,
       video,
       date,
-      visibility
+      visibility,
+      status,
     });
     return res.status(201).json({
       message: "PostAd updated successfully",

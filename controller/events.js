@@ -4,9 +4,9 @@ const Events = db.Events;
 
 export const createEvent = async (req, res) => {
   try {
-    const { title, description, location, eventDate, eventTime,visibility} = req.body;
+    const { title, description, location, googleMap,eventDate, eventTime,visibility} = req.body;
 
-    if (!title || !description || !location || !eventDate || !eventTime || !visibility) {
+    if (!title || !description || !location  ||!googleMap || !eventDate || !eventTime || !visibility) {
       return res.status(400).json({
         message: "All fields are required",
       });
@@ -24,6 +24,7 @@ export const createEvent = async (req, res) => {
       title,
       description,
       location,
+      googleMap,
       eventDate,
       eventTime,
       images,
@@ -65,7 +66,7 @@ export const getEventsById = async (req, res) => {
 export const updateEvnets = async (req, res) => {
   try {
     const { id } = req.params;
-    const { occassion, title, description, location, eventDate, eventTime,visibility } =
+    const { occassion, title, description, location,googleMap, eventDate, eventTime,visibility } =
       req.body;
     const event = await Events.findByPk(id);
     if (!event) return res.status(404).json({ message: "Event are not found" });
@@ -82,6 +83,7 @@ export const updateEvnets = async (req, res) => {
       title,
       description,
       location,
+      googleMap,
       eventDate,
       eventTime,
       images,

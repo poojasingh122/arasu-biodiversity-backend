@@ -30,6 +30,10 @@ export default (sequelize) => {
       type:DataTypes.BOOLEAN,
       allowNull:false,
       defaultValue: true,
+    },
+    status:{
+      type:DataTypes.ENUM("ongoing","completed"),
+      allowNull:false,
     }
   });
   return postAd;

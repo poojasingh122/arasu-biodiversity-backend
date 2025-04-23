@@ -1,14 +1,7 @@
 import { Router } from "express";
 
 const router = Router();
-import {
-  createPostAd,
-  getAllPostAd,
-  getPostAdById,
-  updatePostAd,
-  deletePostAd,
-  deleteAll,
-} from "../controller/postAd.js";
+import {createPostAd,getAllPostAd,getPostAdById,updatePostAd,deletePostAd,deleteAll,} from "../controller/postAd.js";
 import { upload } from "../helpers/uploads.js";
 import { verifyAdminToken } from "../helpers/token.js";
 

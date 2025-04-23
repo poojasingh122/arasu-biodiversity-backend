@@ -1,12 +1,5 @@
 import { Router } from "express";
-import {
-  createTeam,
-  deleteAll,
-  deleteTeam,
-  getAllTeams,
-  getTeamById,
-  updateTeam,
-} from "../controller/team.js";
+import {createTeam,deleteAll,deleteTeam,getAllTeams,getTeamById,updateTeam,} from "../controller/team.js";
 import { verifyAdminToken } from "../helpers/token.js";
 import { upload } from "../helpers/uploads.js";
 

@@ -1,12 +1,6 @@
 import { Router } from "express";
 import {
-  createBlog,
-  deleteAll,
-  deleteBlog,
-  getAllBlog,
-  getBlogById,
-  updateBlog,
-} from "../controller/blog.js";
+  createBlog,deleteAll,deleteBlog,getAllBlog,getBlogById,updateBlog } from "../controller/blog.js";
 import { upload } from "../helpers/uploads.js";
 import { verifyAdminToken } from "../helpers/token.js";
 const router = Router();

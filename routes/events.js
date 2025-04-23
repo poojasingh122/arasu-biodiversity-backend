@@ -1,12 +1,5 @@
 import { Router } from "express";
-import {
-  createEvent,
-  deleteAll,
-  deleteEvent,
-  getAllEvents,
-  getEventsById,
-  updateEvnets,
-} from "../controller/events.js";
+import {createEvent,deleteAll,deleteEvent,getAllEvents,getEventsById,updateEvnets } from "../controller/events.js";
 import { upload } from "../helpers/uploads.js";
 import { verifyAdminToken } from "../helpers/token.js";
 
