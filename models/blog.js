@@ -35,11 +35,14 @@ export default (sequelize) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
+<<<<<<< Updated upstream
     visibility:{
       type:DataTypes.BOOLEAN,
       allowNull:false,
       defaultValue: true,
     }
+=======
+>>>>>>> Stashed changes
   });
   return blogs;
 };
