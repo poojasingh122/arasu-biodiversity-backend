@@ -14,7 +14,11 @@ export const createUserTrack = async (req, res) => {
         ip,name,city,region,country,postal,latitude,longitude,timeZone,
 
      });
-
+     const existingTrack = await UserTrack.findOne({ where: { ip } });
+     if (existingTrack) {
+       return res.status(200).json({ message: "IP already tracked", data: existingTrack });
+     }
+     
     return res.status(201).json({
       message: " create UserTrack successfully",
       data: newUserTrack,
@@ -48,5 +52,22 @@ export const deleteUserTrack = async (req, res) => {
     return res.status(400).json({
       message: error.message,
     });
+  }
+};
+
+export const deleteAll = async (req, res) => {
+  try {
+    const { ids } = req.body;
+
+    if (!Array.isArray(ids) || ids.length === 0) {
+      return res.status(400).json({ message: "No userTrack IDs provided" });
+    }
+
+    await UserTrack.destroy({ where: { id: ids } });
+
+    return res.status(200).json({ message: "Selected UserTrack deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting UserTrack:", error);
+    return res.status(500).json({ message: "Internal server error" });
   }
 };

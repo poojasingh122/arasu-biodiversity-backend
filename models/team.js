@@ -16,25 +16,18 @@ export default (sequelize) => {
       allowNull: true,
     },
     role: {
-<<<<<<< Updated upstream
       type: DataTypes.ENUM("founder","boa"),
-=======
-      type: DataTypes.ENUM("founder", "bao"),
->>>>>>> Stashed changes
       allowNull: false,
     },
     images: {
       type: DataTypes.JSON,
       allowNull: false,
     },
-<<<<<<< Updated upstream
     visibility:{
       type:DataTypes.BOOLEAN,
       allowNull:false,
       defaultValue: true,
     }
-=======
->>>>>>> Stashed changes
   });
   return team;
 };
