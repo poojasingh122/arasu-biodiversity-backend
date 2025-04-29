@@ -12,6 +12,7 @@ import contactUsRoutes from "./contactUs.js";
 import paymentUserRoutes from "./paymentForm.js";
 import userTrackRoutes from './user.js'
 import paymentRoutes from './razorpay.js'
+import adminDashboardRoutes from './adminDashboard.js'
 
 router.use("/", adminRoutes);
 router.use("/post", postAdRoutes);
@@ -24,5 +25,6 @@ router.use("/contact", contactUsRoutes);
 router.use("/paymentUser", paymentUserRoutes);
 router.use("/userTrack",userTrackRoutes)
 router.use("/payment",paymentRoutes)
+router.use("/admin",adminDashboardRoutes);
 
 export { router };
