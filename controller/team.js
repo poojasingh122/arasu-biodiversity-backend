@@ -4,8 +4,8 @@ const Teams = db.Team;
 
 export const createTeam = async (req, res) => {
   try {
-    const { name, designation, role, visibility } = req.body;
-    if (!name || !role || !visibility) {
+    const { name, designation,description, role, visibility } = req.body;
+    if (!name || !role || !visibility || !description) {
       return res.status(400).json({
         message: "All fields are required",
       });
@@ -26,6 +26,7 @@ export const createTeam = async (req, res) => {
     const newTeam = await Teams.create({
       name,
       designation: role === "boa" ? designation : null,
+      description,
       role,
       visibility,
       images,
@@ -66,7 +67,7 @@ export const getTeamById = async (req, res) => {
 export const updateTeam = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, designation, role,visibility } = req.body;
+    const { name, designation ,description, role,visibility } = req.body;
     const team = await Teams.findByPk(id);
     if (!team)
       return res.status(404).json({ message: "Team Member not found" });
@@ -92,8 +93,9 @@ export const updateTeam = async (req, res) => {
 
     team.name = name || team.name;
     team.designation = role === "boa" ? designation : null;
+    team.description = description || team.description;
     team.role = role || team.role;
-    team.visibility = visibility || team.visibility;
+    team.visibility = visibility;
     if (images) team.images = images;
     await team.save();
     res.status(201).json({

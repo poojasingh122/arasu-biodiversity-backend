@@ -15,6 +15,10 @@ export default (sequelize) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
+    description:{
+      type:DataTypes.STRING,
+      allowNull:false,
+    },
     role: {
       type: DataTypes.ENUM("founder","boa"),
       allowNull: false,
